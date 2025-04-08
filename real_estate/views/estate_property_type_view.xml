@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Search View -->
+    <record id="estate_property_type_search_view" model="ir.ui.view">
+        <field name="name">estate.property.type.search.view</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <search string="Estate Type">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="estate_property_type_tree_view" model="ir.ui.view">
+        <field name="name">estate.property.type.view.tree</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <tree string="Estate Type">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_type_form_view" model="ir.ui.view">
+        <field name="name">estate_property_type_form_view</field>
+        <field name="model">estate.property.type</field>
+        <field name="arch" type="xml">
+            <form string="estate_property_type_form">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_property_ids" type="object"
+                            class="oe_stat_button" icon="fa-star">
+                            <div class="o_stat_info">
+                                <field name="property_count" widget="line_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Property Offers</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name"/>
+                        </div>
+                        <h1 class="mb32">
+                            <field name="name" class="mb16"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="offer_count"/>
+                    </group>
+                    <notebook>
+                        <page name="properties" string="Properties">
+                            <field name="property_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="selling_price"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="estate_property_type_action" model="ir.actions.act_window">
+        <field name="name">Real Estate Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
