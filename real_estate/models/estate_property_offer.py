@@ -3,7 +3,12 @@ from  dateutil import relativedelta
 
 from odoo import api, fields, models , _
 from odoo.exceptions import UserError
+<<<<<<< HEAD
 from odoo.exceptions import  ValidationError
+=======
+
+
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
 class EstateOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Offers made for real estates"
@@ -16,9 +21,15 @@ class EstateOffer(models.Model):
         ],
         copy=False,
     )
+<<<<<<< HEAD
     partner_id = fields.Many2one("res.partner",)
     property_id = fields.Many2one("estate.property" , invisible=True)
     property_offer_id = fields.Many2one("estate.property.type", invisible=True)
+=======
+    partner_id = fields.Many2one("res.partner", required=True)
+    property_id = fields.Many2one("estate.property", required=True , invisible=True)
+    property_offer_id = fields.Many2one("estate.property.type", required=True , invisible=True)
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
     type_id = fields.Many2one(related='property_id.property_type_id' , store=True)
 
     validity = fields.Integer(default=7)
@@ -38,16 +49,22 @@ class EstateOffer(models.Model):
         self.ensure_one()
         if 'accepted' in self.property_id.offer_ids.mapped('status'): #this is because it returns the list if ids
             raise  UserError(_('The offer is already accepted'))
+<<<<<<< HEAD
         self._check_constraint()
+=======
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
         self.status = 'accepted'
         self.property_id.selling_price = self.price
 
 
     def action_refuse(self):
         self.status = 'refused'
+<<<<<<< HEAD
 
     # @api.constrains('selling_price')
     def _check_constraint(self):
         for estate in self:
             if estate.property_id.expected_price > estate.price:
                 raise ValidationError(_("Sorry The offer can't be accepted because your accepted offer price is less than expected price"))
+=======
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6

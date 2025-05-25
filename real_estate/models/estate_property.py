@@ -4,7 +4,11 @@ from typing import Dict, List
 from dateutil.relativedelta import relativedelta
 from pkg_resources import require
 from reportlab.graphics.transform import inverse
+<<<<<<< HEAD
 from  datetime import date
+=======
+
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
 from  odoo import api , models , fields , _
 from odoo.exceptions import ValidationError
 from odoo.tools.populate import compute
@@ -95,6 +99,7 @@ class RealEstate(models.Model):
     @api.onchange('date_availability')
     def _onchange_date_availability(self):
         for estate in self:
+<<<<<<< HEAD
             if estate.date_availability < date.today():
                 return {
                     "warning":{"title":_("Invalid Date") , "message":_("Your date avalibility is not set today date")}
@@ -102,8 +107,19 @@ class RealEstate(models.Model):
 
 
     # @api.constrains('selling_price')
+=======
+            return {
+                "warning":{"title":_("warning") , "message":_("this is onchange methode")}
+            }
+
+    @api.constrains('selling_price')
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
     def _check_constraint(self):
         for estate in self:
             if estate.best_offer > estate.selling_price :
                 raise ValidationError(_('The selling price is Less than best offer'))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6

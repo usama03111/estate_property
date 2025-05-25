@@ -2,7 +2,11 @@
 <odoo>
 
     <!-- Root level menu -->
+<<<<<<< HEAD
     <menuitem id="root_level_property" name="Root">
+=======
+    <menuitem id="root_level" name="Root">
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
         <menuitem id="second_level" name="Estate">
             <menuitem id="third_level" name="Property" action="estate_property_action"/>
         </menuitem>
@@ -11,12 +15,15 @@
             <menuitem id="property_type" name="Property Type" action="estate_property_type_action"/>
             <menuitem id="property_tag" name="Property Tag" action="estate_property_tag_action"/>
         </menuitem>
+<<<<<<< HEAD
 
           <!-- This Menu Item must have a parent and an action -->
     <menuitem id="root_property_report" name="Report"  >
         <menuitem id="sub_property_report" name="Report"  action="action_property_report" />
     </menuitem>
 
+=======
+>>>>>>> 05b39e2e21064740b2093465314b30c8cdd717a6
     </menuitem>
 
 </odoo>
