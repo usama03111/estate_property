@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+        <record id="view_property_report" model="ir.ui.view">
+            <field name="name">Create Menu</field>
+            <field name="model">property.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Print Report">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <footer>
+                        <button name="print_property_report" string="Print Property" type="object" class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel"  />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_property_report" model="ir.actions.act_window">
+            <field name="name">Print Property</field>
+            <field name="res_model">property.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_property_report"/>
+            <field name="target">new</field>
+        </record>
+
+
+</odoo>

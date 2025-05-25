@@ -50,6 +50,7 @@
                     <group>
                         <field name="offer_count"/>
                     </group>
+
                     <notebook>
                         <page name="properties" string="Properties">
                             <field name="property_ids">

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="estate_property_home">
+        <t t-call="website.layout">
+            <title>Real Estate</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <ul>
+                        <t t-foreach="propertys" t-as="property">
+                            <p>
+                                <a t-attf-href="/realestate/property/{{ slug(property) }}">
+                                    <t t-esc="property.name"/>
+                                </a>
+                            </p>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <!--<template id="estate_property_detail">
+        <t t-call="website.layout">
+            <t t-set="title">Real Estate Property</t>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <title>Real Estate Property</title>
+                <div class="container">
+                     <h3 t-field="name.name"/>
+                    <h3>
+                        <t t-esc="name.name"/>
+                    </h3>
+                    <li>
+                        <t t-esc="name.state"/>
+                    </li>
+                    <li>
+                        <span t-field="name.expected_price"/>
+                    </li>
+                    <li>
+                        <t t-esc="name.postcode"/>
+                    </li>
+                    <li>
+                        <t t-esc="name.date_availability"/>
+                    </li>
+                </div>
+                <t t-if="name.offer_ids">
+                    <t t-set="title">Offers</t>
+                    <div class="container">
+                        <t t-foreach="name.offer_ids" t-as="offer">
+                            <li>
+                                <t t-esc="offer.price"/>
+                            </li>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template> -->
+
+    <!--From This code we add the menu inside the home portal-->
+    <template id="portal_my_home_menu_recruitment" name="Recruitment" inherit_id="portal.portal_my_home"
+              customize_show="True" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="icon" t-value="'/project/static/src/img/folder.svg'"/>
+                <t t-set="title">Homes</t>
+                <t t-set="url" t-value="'/realestate/'"/>
+                <t t-set="text">View the Homes</t>
+                <t t-set="placeholder_count" t-value="'count'"/>
+            </t>
+        </xpath>
+    </template>
+
+
+    <!--This code is for Table-->
+    <template id="portal_my_estate_property" name="My Homes">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Homes</t>
+            </t>
+            <t t-if="not propertys">
+                <p class="alert alert-warning">There are currently no Homes .</p>
+            </t>
+            <t t-if="propertys" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th name="house">House</th>
+                        <th name="house">Property Type</th>
+                        <th name="post_code">Post Code</th>
+                        <th name="date_availability" class='d-none d-md-table-cell'>Date Availability</th>
+                        <th name="expected_price">Expected Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="propertys" t-as="propertys">
+                        <tr>
+                            <td>
+                                <!--This convert the House Name into the URL-->
+                                <a t-attf-href="/realestate/property/{{ slug(propertys) }}">
+                                    <t t-esc="propertys.name"/>
+                                </a>
+                            </td>
+                            <td>
+                                <span t-field="propertys.property_type_id"/>
+                            </td>
+                            <td>
+                                <span t-field="propertys.postcode"/>
+                            </td>
+                            <td class='d-none d-md-table-cell'>
+                                <span t-field="propertys.date_availability"/>
+                            </td>
+                            <td>
+                                <span t-field="propertys.expected_price"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+
+    <!--here i want to show the bread crumbs-->
+     <template id="portal_recruitment_home" name="homes" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-attf-class="breadcrumb-item #{'active ' if not estate_property else ''}">
+                <a t-attf-href="/realestate?{{ keep_query() }}">Houses</a>
+            </li>
+        </xpath>
+    </template>
+
+<!--here i want to show the bread crumbs-->
+     <!--<template id="portal_recruitment_home" name="homes" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'estate_property'"
+                t-attf-class="breadcrumb-item #{'active ' if not estate_property else ''}">
+                <a t-if="estate_property" t-attf-href="/realestate?{{ keep_query() }}">Houses</a>
+                <t t-else="">Houses</t>
+            </li>
+            <li t-if="estate_property" class="breadcrumb-item active">
+                <t t-esc="invoice.name"/>
+            </li>
+        </xpath>
+    </template>-->
+
+
+
+    <!--Here the Data will be displayed-->
+    <template id="estate_property_detail" name="My Home">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url"
+                       t-value="'/web#model=estate.property&amp;id=%s&amp;view_type=form' % (name.id)"/>
+                </t>
+            </t>
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h3 class="mb-1 mb-md-0">
+                        <small class="text_muted">Course -</small>
+                        <span t-field="name.name"/>
+                    </h3>
+                </t>
+                <t t-set="card_body">
+                    <div class="o_sign_portal">
+                        <h5>
+                            <t t-esc="name.name"/>
+                        </h5>
+                        <li>
+                            <t t-esc="name.state"/>
+                        </li>
+                        <li>
+                            <span t-field="name.expected_price"/>
+                        </li>
+                        <li>
+                            <t t-esc="name.postcode"/>
+                        </li>
+                        <li>
+                            <t t-esc="name.date_availability"/>
+                        </li>
+                    </div>
+                    <t t-if="name.offer_ids">
+                        <t t-set="title">Offers</t>
+                        <div class="container">
+                            <t t-foreach="name.offer_ids" t-as="offer">
+                                <li>
+                                    <t t-esc="offer.price"/>
+                                </li>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+
+
+
+
+
+</odoo>

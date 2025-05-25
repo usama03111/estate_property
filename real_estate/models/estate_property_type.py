@@ -1,4 +1,5 @@
 from email.policy import default
+from itertools import count
 
 from  odoo import models , api , fields , _
 from odoo.tools.populate import compute
@@ -34,6 +35,7 @@ class PropertyType(models.Model):
     def _compute_offer_count(self):
         for rec  in self:
             rec.offer_count = len(rec.offer_ids) if rec.offer_ids else 0
+            # rec.offer_count = self.env["estate.property.offer"].search_count([])
 
     @api.depends("property_ids")
     def _compute_property_count(self):
@@ -42,6 +44,8 @@ class PropertyType(models.Model):
 
 
     def action_open_property_ids(self):
+        search = self.env["estate.property"].search([("property_type_id",'=',self.id)])
+        print(search)
         return {
             "name":_("Related Properties"),
             "type": "ir.actions.act_window",

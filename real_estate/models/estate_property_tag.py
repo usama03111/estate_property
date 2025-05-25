@@ -1,6 +1,6 @@
 from pkg_resources import require
 
-from odoo import fields, models
+from odoo import fields, models , api
 
 class EstateOffer(models.Model):
     _name = "estate.property.tag"

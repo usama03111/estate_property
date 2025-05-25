@@ -1,0 +1,4 @@
+id,name,property_type_id:id
+estate_property_1,"House CSV",property_type_1
+estate_property_2,"House CSV 2",property_type_2
+estate_property_3,"House csv one2many",property_type_3

@@ -1,0 +1,4 @@
+id,name,offer_ids:id,property_type_id:id,tag_ids:id
+estate_property_3,"House csv one2many",offer_ids_1,property_type_3,
+estate_property_3,"House csv one2many",offer_ids_2,property_type_3,
+estate_property_4,"House csv many2many",offer_ids_3,property_type_4,"estate_property_tag_1,estate_property_tag_2"
