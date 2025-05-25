@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Root level menu -->
+    <menuitem id="root_level_property" name="Root">
+        <menuitem id="second_level" name="Estate">
+            <menuitem id="third_level" name="Property" action="estate_property_action"/>
+        </menuitem>
+
+        <menuitem id="estate_setting_level" name="Settings">
+            <menuitem id="property_type" name="Property Type" action="estate_property_type_action"/>
+            <menuitem id="property_tag" name="Property Tag" action="estate_property_tag_action"/>
+        </menuitem>
+
+          <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="root_property_report" name="Report"  >
+        <menuitem id="sub_property_report" name="Report"  action="action_property_report" />
+    </menuitem>
+
+    </menuitem>
+
+</odoo>

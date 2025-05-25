@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!--    here we create the  record in the "estate.property.type" model-->
+        <record id="estate_property_type_1" model="estate.property.type">
+            <field name="name">Appartment xml</field>
+        </record>
+
+        <!--  here we create the  record in the "estate.property" model and add the many2one field-->
+        <record id="estate_property_1" model="estate.property">
+            <field name="name">House xml many2one</field>
+            <field name="postcode">83453</field>
+            <field name="expected_price">50000</field>
+            <field name="property_type_id" ref="real_estate.estate_property_type_1"/>
+            <field name="description">this record is created from the xml side</field>
+        </record>
+
+        <!-- this is the first way here we create the  record in the "estate.property" model and add these record as
+         many2one field in the estate.property.offer model-->
+        <record id="estate_property_2" model="estate.property">
+            <field name="name">House xml one2many</field>
+            <field name="postcode">987685</field>
+            <field name="expected_price">40000</field>
+            <field name="description">this record is created from the xml side to add the value from many2one to these
+                record
+            </field>
+        </record>
+
+        <record id="estate_property_offer_1" model="estate.property.offer">
+            <field name="price">600000.00</field>
+            <field name="status">accepted</field>
+            <!--The <field name="property_id" ref="..."/> syntax only works for Many2one or Many2many relations.-->
+            <field name="property_id" ref="real_estate.estate_property_2"/>
+        </record>
+
+
+        <!--Here we created a record in the estate.property model and directly create their one2many field data-->
+        <record id="estate_property_xml_4" model="estate.property">
+            <field name="name">House one2many dir</field>
+            <field name="postcode">112685</field>
+            <field name="expected_price">30000</field>
+            <field name="description">this record is created from the xml side to add the value directly to the one2many
+                field
+            </field>
+            <field name="offer_ids" eval="[(0,0,{'price':700000 ,'status':'accepted'}),
+        (0,0,{'price':500000 ,'status':'refused'})]"/>
+        </record>
+
+
+        <!--Here we created a records in the estate.property.tag model and directly pass to the estate.property model
+         as a many2many field data-->
+        <record id="estate_property_tag_xml_1" model="estate.property.tag">
+            <field name="name">Big Garden xml</field>
+            <field name="color">1</field>
+        </record>
+        <record id="estate_property_tag_xml_2" model="estate.property.tag">
+            <field name="name">Big Terris xml</field>
+            <field name="color">4</field>
+        </record>
+
+        <record id="estate_property_xml_3" model="estate.property">
+            <field name="name">House xml many2many</field>
+            <field name="postcode">789878</field>
+            <field name="expected_price">50000</field>
+            <field name="description">this record is created from the xml side to add the value of many2many to these
+                record
+            </field>
+            <!--[(6,0,[])] it will replace existing relation ids with given ids-->
+            <field name="tag_ids" eval="[(6,0,[ref('estate_property_tag_xml_1'),ref('estate_property_tag_xml_2')])]"/>
+        </record>
+
+    </data>
+</odoo>

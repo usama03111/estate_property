@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="estate_property_type_menu" model="website.menu">
+        <field name="name">Estate Property</field>
+        <field name="url"></field>
+        <field name="parent_id" search="[('parent_id', '=',False), ('website_id', '=' ,obj().env.ref('website.default_website').id)]"/>
+        <field name="sequence">50</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <record id="estate_property_type_sub" model="website.menu">
+        <field name="name">Property Type</field>
+        <field name="url">/realestate/</field>
+        <field name="parent_id" ref="real_estate.estate_property_type_menu"/>
+        <field name="sequence">10</field>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+
+
+</odoo>
